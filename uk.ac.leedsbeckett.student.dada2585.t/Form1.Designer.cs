@@ -33,14 +33,19 @@
             groupBox2 = new GroupBox();
             richTextBox1 = new RichTextBox();
             textBox1 = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -52,6 +57,10 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(pictureBox1);
             splitContainer1.Size = new Size(1008, 605);
             splitContainer1.SplitterDistance = 470;
             splitContainer1.TabIndex = 0;
@@ -69,6 +78,8 @@
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.Controls.Add(button2);
+            splitContainer2.Panel2.Controls.Add(button1);
             splitContainer2.Panel2.Controls.Add(textBox1);
             splitContainer2.Size = new Size(470, 605);
             splitContainer2.SplitterDistance = 405;
@@ -100,6 +111,34 @@
             textBox1.Size = new Size(452, 27);
             textBox1.TabIndex = 0;
             // 
+            // button1
+            // 
+            button1.Location = new Point(15, 45);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 1;
+            button1.Text = "Run";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(161, 45);
+            button2.Name = "button2";
+            button2.Size = new Size(116, 29);
+            button2.TabIndex = 2;
+            button2.Text = "Syntax Check";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = SystemColors.ActiveBorder;
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(528, 436);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -109,6 +148,7 @@
             Name = "Form1";
             Text = "Form1";
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             splitContainer2.Panel1.ResumeLayout(false);
@@ -117,6 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -127,5 +168,8 @@
         private GroupBox groupBox2;
         private RichTextBox richTextBox1;
         private TextBox textBox1;
+        private Button button2;
+        private Button button1;
+        private PictureBox pictureBox1;
     }
 }
