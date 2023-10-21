@@ -29,10 +29,18 @@
         private void InitializeComponent()
         {
             splitContainer1 = new SplitContainer();
-            panel1 = new Panel();
+            splitContainer2 = new SplitContainer();
+            groupBox2 = new GroupBox();
+            richTextBox1 = new RichTextBox();
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -43,35 +51,81 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(panel1);
-            splitContainer1.Size = new Size(1291, 605);
-            splitContainer1.SplitterDistance = 430;
+            splitContainer1.Panel1.Controls.Add(splitContainer2);
+            splitContainer1.Size = new Size(1008, 605);
+            splitContainer1.SplitterDistance = 470;
             splitContainer1.TabIndex = 0;
             // 
-            // panel1
+            // splitContainer2
             // 
-            panel1.Location = new Point(3, 339);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(424, 263);
-            panel1.TabIndex = 0;
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
+            splitContainer2.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(groupBox2);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(textBox1);
+            splitContainer2.Size = new Size(470, 605);
+            splitContainer2.SplitterDistance = 405;
+            splitContainer2.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(richTextBox1);
+            groupBox2.Location = new Point(12, 12);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(455, 390);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "groupBox2";
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Dock = DockStyle.Fill;
+            richTextBox1.Location = new Point(3, 23);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(449, 364);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 3);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(452, 27);
+            textBox1.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1291, 605);
+            ClientSize = new Size(1008, 605);
             Controls.Add(splitContainer1);
             Name = "Form1";
             Text = "Form1";
             splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private SplitContainer splitContainer1;
-        private Panel panel1;
+        private SplitContainer splitContainer2;
+        private GroupBox groupBox2;
+        private RichTextBox richTextBox1;
+        private TextBox textBox1;
     }
 }
