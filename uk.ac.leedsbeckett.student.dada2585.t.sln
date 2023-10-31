@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uk.ac.leedsbeckett.student.dada2585.t", "uk.ac.leedsbeckett.student.dada2585.t\uk.ac.leedsbeckett.student.dada2585.t.csproj", "{D3B1CB91-F348-4A52-BCED-855DECD506A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uk.ac.leedsbeckett.student.dada2585.t", "uk.ac.leedsbeckett.student.dada2585.t\uk.ac.leedsbeckett.student.dada2585.t.csproj", "{D3B1CB91-F348-4A52-BCED-855DECD506A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7807787C-904D-402B-8944-78E36D78101D}"
 	ProjectSection(SolutionItems) = preProject
 		project Spec.txt = project Spec.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpTests", "GpTests\GpTests.csproj", "{5A7F34D6-D217-4A29-B2FD-6FB35849B15F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{D3B1CB91-F348-4A52-BCED-855DECD506A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3B1CB91-F348-4A52-BCED-855DECD506A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3B1CB91-F348-4A52-BCED-855DECD506A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7F34D6-D217-4A29-B2FD-6FB35849B15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7F34D6-D217-4A29-B2FD-6FB35849B15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7F34D6-D217-4A29-B2FD-6FB35849B15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7F34D6-D217-4A29-B2FD-6FB35849B15F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
