@@ -32,9 +32,9 @@
             splitContainer2 = new SplitContainer();
             groupBox2 = new GroupBox();
             richTextBox1 = new RichTextBox();
-            textBox1 = new TextBox();
-            button1 = new Button();
             button2 = new Button();
+            button1 = new Button();
+            textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -104,22 +104,6 @@
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(12, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(452, 27);
-            textBox1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(15, 45);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 1;
-            button1.Text = "Run";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             button2.Location = new Point(161, 45);
@@ -130,14 +114,35 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(15, 45);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 1;
+            button1.Text = "Run";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 3);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(452, 27);
+            textBox1.TabIndex = 0;
+            // 
             // pictureBox1
             // 
             pictureBox1.BackColor = SystemColors.ActiveBorder;
-            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(528, 436);
+            pictureBox1.Size = new Size(534, 605);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Paint += pictureBox1_Paint;
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
             // Form1
             // 
