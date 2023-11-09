@@ -27,9 +27,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             Point B = new Point(y, z);
             Point C = new Point(x, z);
             Point[] triangle = { A, B, C };
-            g.DrawPolygon(p, triangle);
             g.FillPolygon(sb, triangle);
-
+            g.DrawPolygon(p, triangle);
         }
     }
 }

@@ -59,5 +59,15 @@ namespace uk.ac.leedsbeckett.student.dada2585.t.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Hopstarter_Button_Button_Play_256 {
+            get {
+                object obj = ResourceManager.GetObject("Hopstarter-Button-Button-Play.256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
