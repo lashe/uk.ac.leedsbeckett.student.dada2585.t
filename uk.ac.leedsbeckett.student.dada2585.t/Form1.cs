@@ -112,6 +112,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.DefaultExt = "txt";
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (commandInputField.Text == null)
             {
                 Graphics graphics = pictureBox1.CreateGraphics();
@@ -124,8 +125,12 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = saveFileDialog.FileName;
-                    StreamWriter writer = new StreamWriter(filePath);
-                    writer.Write(commandInputField.Text);
+
+                    using (StreamWriter writer = new StreamWriter(filePath))
+                    {
+                        writer.Write(commandInputField.Text);
+                    }
+
                     MessageBox.Show("save successful", "Success", MessageBoxButtons.OK);
                 }
             }
@@ -136,11 +141,14 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = "txt";
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = openFileDialog.FileName;
-                StreamReader reader = new StreamReader(filePath);
-                commandInputField.Text = reader.ReadToEnd();
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    commandInputField.Text = reader.ReadToEnd();
+                }
             }
         }
     }
