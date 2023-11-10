@@ -137,7 +137,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void LoadFileButtonClick(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = "txt";

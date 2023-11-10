@@ -97,7 +97,7 @@
             button4.TabIndex = 2;
             button4.Text = "Load";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            button4.Click += LoadFileButtonClick;
             // 
             // button3
             // 

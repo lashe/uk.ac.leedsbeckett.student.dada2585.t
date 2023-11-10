@@ -9,11 +9,11 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 {
     internal class CommandCheck
     {
-        readonly string penPositon = @"^moveto \d+ \s+ \d+$";
-        readonly string drawingPosition = @"^drawto \d+ \s+ \d+$";
-        readonly string drawCircle = @"^circle \d+ \s+ \d+$";
-        readonly string drawRectangle = @"^rectangle \d+ \s+ \d+$";
-        readonly string drawTriangle = @"^triangle \s+ \d+$";
+         string penPositon = @"^moveto \d+ \d+$";
+         string drawingPosition = @"^drawto \d+ \d+$";
+         string drawCircle = @"^circle \d+$";
+         string drawRectangle = @"^rectangle \d+ \d+$";
+         string drawTriangle = @"^triangle \d+$";
 
         public bool CheckCommand( string command)
         {
