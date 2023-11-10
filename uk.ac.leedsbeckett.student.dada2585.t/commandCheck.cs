@@ -9,44 +9,37 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 {
     internal class CommandCheck
     {
-        protected string penPositon = @"^moveto \d+ \d+$";
-        protected string drawingPosition = @"^moveto \d+ \d+$";
-        protected string drawCircle = @"^circle \d+ \d+$";
-        protected string drawRectangle = @"^rectangle \d+ \d+$";
-        protected string drawTriangle = @"^triangle \d+$";
-        protected Boolean checkCommand;
+        readonly string penPositon = @"^moveto \d+ \s+ \d+$";
+        readonly string drawingPosition = @"^drawto \d+ \s+ \d+$";
+        readonly string drawCircle = @"^circle \d+ \s+ \d+$";
+        readonly string drawRectangle = @"^rectangle \d+ \s+ \d+$";
+        readonly string drawTriangle = @"^triangle \s+ \d+$";
 
-        public CommandCheck( string command)
+        public bool CheckCommand( string command)
         {
-            if (Regex.IsMatch(command, penPositon, RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(command, penPositon, RegexOptions.IgnoreCase) == true)
             {
-                checkCommand = true;
-                return;
+                return true;
             }
-            else if (Regex.IsMatch(command, drawingPosition, RegexOptions.IgnoreCase))
+            else if (Regex.IsMatch(command, drawingPosition, RegexOptions.IgnoreCase) == true)
             {
-                checkCommand = true;
-                return;
+                return true;
             }
-            else if( Regex.IsMatch(command, drawCircle, RegexOptions.IgnoreCase))
+            else if( Regex.IsMatch(command, drawCircle, RegexOptions.IgnoreCase) == true)
             {
-                checkCommand = true;
-                return;
+                return true;
             }
-            else if(Regex.IsMatch(command, drawTriangle, RegexOptions.IgnoreCase))
+            else if(Regex.IsMatch(command, drawTriangle, RegexOptions.IgnoreCase) == true)
             {
-                checkCommand = true;
-                return;
+                return true;
             }
-            else if (Regex.IsMatch(command, drawRectangle, RegexOptions.IgnoreCase))
+            else if (Regex.IsMatch(command, drawRectangle, RegexOptions.IgnoreCase) == true)
             {
-                checkCommand= true;
-                return;
+                return true;
             }
             else
             {
-                checkCommand = false;
-                return;
+                return false;
             }
         }
     }

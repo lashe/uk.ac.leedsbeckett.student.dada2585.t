@@ -1,14 +1,15 @@
 using System.Collections;
-using System.Text.RegularExpressions;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
     public partial class Form1 : Form
     {
-        Bitmap drawBitmap = new Bitmap(534, 605);
+        Bitmap drawBitmap = new Bitmap(534, 436);
         Pen drawinPen = new Pen(Color.Green, 3);
         Boolean mouseDown = false;
         ArrayList shapes = new ArrayList();
+        ArrayList commandList = new ArrayList();
+        ArrayList errorList = new ArrayList();
         public Form1()
         {
             InitializeComponent();
@@ -61,12 +62,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string command = commandInputField.Text;
-            Refresh();
-            pictureBox1.Image = new Bitmap(534, 605);
+            string[] commands = commandInputField.Lines;
             try
             {
-                if (command == "")
+                if (commandInputField.Text == "")
                 {
                     // error handler
                     pictureBox1.Image = null;
@@ -79,26 +78,38 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 }
                 else
                 {
-                    string penPositon = @"^moveto \d+ \d+$";
-                    string drawingPosition = @"^moveto \d+ \d+$";
-                    string drawCircle = @"^circle \d+ \d+$";
-                    string drawRectangle = @"^rectangle \d+ \d+$";
-                    string drawTriangle = @"^triangle \d+$";
+                    CommandCheck checkCommand = new CommandCheck();
+                    // Graphics g = Graphics.FromImage(drawBitmap);
+                    Graphics graphics = pictureBox1.CreateGraphics();
+                    graphics.Clear(Color.White);
+                    for (int i = 0; i < commands.Length; i++)
+                    {
+                        if (checkCommand.CheckCommand(commands[i]) == true)
+                        {
+                            commandList.Add(commands[i]);
+                        }
+                        else
+                        {
+                            string error = $"error on line {i + 1} at {commands[i]}";
+                            errorList.Add(error);
+                        }
 
-                    // switching all input to lowercase
-                    /*string caseInsensitive = command.ToLower();
-                    Graphics g = Graphics.FromImage(drawBitmap);
+                    }
+                    if (errorList.Count > 0)
+                    {
+                        // execute command
+                    }
+                    Console.WriteLine(errorList);
+                    graphics.Clear(Color.White);
                     Font font = new Font("Arial", 10);
-                    Brush brush = Brushes.Black;
-                    string response = caseInsensitive;
-                    g.DrawString(response, font, brush, 10, 10);
-                    pictureBox1.Image = drawBitmap;
-                    Refresh();*/
-                    /* shapes.Add(new Circle(Color.AliceBlue, 10, 100, 100));
-                     shapes.Add(new Circle(Color.Fuchsia, 100, 10, 50));
-                     shapes.Add(new Rectangle(Color.Beige, 100, 100, 50, 100));
-                     shapes.Add(new Triangle(Color.Red, 100, 200, 300));
-                     Refresh();*/
+                    Brush brush = Brushes.Red;
+                    int x = 10; int y = 10;
+                    foreach (string error in errorList)
+                    {
+                        graphics.DrawString(error, font, brush, x, y);
+                        y += (int)font.GetHeight();
+                    }
+                    //ErrorHandler.HandleError(errorList, graphics, font, brush, 10, 10);
                 }
             }
             catch (Exception ex)

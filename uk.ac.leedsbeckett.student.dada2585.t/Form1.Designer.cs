@@ -63,7 +63,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(pictureBox1);
-            splitContainer1.Size = new Size(1008, 605);
+            splitContainer1.Size = new Size(1008, 764);
             splitContainer1.SplitterDistance = 470;
             splitContainer1.TabIndex = 0;
             // 
@@ -85,8 +85,8 @@
             splitContainer2.Panel2.Controls.Add(button2);
             splitContainer2.Panel2.Controls.Add(button1);
             splitContainer2.Panel2.Controls.Add(textBox1);
-            splitContainer2.Size = new Size(470, 605);
-            splitContainer2.SplitterDistance = 454;
+            splitContainer2.Size = new Size(470, 764);
+            splitContainer2.SplitterDistance = 456;
             splitContainer2.TabIndex = 0;
             // 
             // button4
@@ -128,7 +128,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(160, 73);
+            button2.Location = new Point(178, 6);
             button2.Name = "button2";
             button2.Size = new Size(118, 40);
             button2.TabIndex = 2;
@@ -139,7 +139,7 @@
             // button1
             // 
             button1.Image = Properties.Resources.Hopstarter_Button_Button_Play_256;
-            button1.Location = new Point(12, 73);
+            button1.Location = new Point(27, 6);
             button1.Name = "button1";
             button1.Size = new Size(109, 40);
             button1.TabIndex = 1;
@@ -149,18 +149,17 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 40);
+            textBox1.Location = new Point(12, 52);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(452, 27);
+            textBox1.Size = new Size(397, 27);
             textBox1.TabIndex = 0;
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = SystemColors.ActiveBorder;
-            pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(534, 605);
+            pictureBox1.Size = new Size(534, 436);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.Paint += pictureBox1_Paint;
@@ -172,7 +171,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 605);
+            ClientSize = new Size(1008, 764);
             Controls.Add(splitContainer1);
             Name = "Form1";
             Text = "Form1";
