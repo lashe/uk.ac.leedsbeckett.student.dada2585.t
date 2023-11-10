@@ -95,8 +95,9 @@
             button4.Name = "button4";
             button4.Size = new Size(94, 29);
             button4.TabIndex = 2;
-            button4.Text = "button4";
+            button4.Text = "Load";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -104,8 +105,9 @@
             button3.Name = "button3";
             button3.Size = new Size(94, 29);
             button3.TabIndex = 1;
-            button3.Text = "button3";
+            button3.Text = "Save";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // groupBox2
             // 

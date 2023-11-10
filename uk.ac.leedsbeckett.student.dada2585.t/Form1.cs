@@ -99,22 +99,48 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     {
                         // execute command
                     }
-                    Console.WriteLine(errorList);
-                    graphics.Clear(Color.White);
-                    Font font = new Font("Arial", 10);
-                    Brush brush = Brushes.Red;
-                    int x = 10; int y = 10;
-                    foreach (string error in errorList)
-                    {
-                        graphics.DrawString(error, font, brush, x, y);
-                        y += (int)font.GetHeight();
-                    }
-                    //ErrorHandler.HandleError(errorList, graphics, font, brush, 10, 10);
+                    ErrorHandler.HandleError(errorList, graphics);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = "txt";
+            if (commandInputField.Text == null)
+            {
+                Graphics graphics = pictureBox1.CreateGraphics();
+
+                errorList.Add("no text input");
+                ErrorHandler.HandleError(errorList, graphics);
+            }
+            else
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    StreamWriter writer = new StreamWriter(filePath);
+                    writer.Write(commandInputField.Text);
+                    MessageBox.Show("save successful", "Success", MessageBoxButtons.OK);
+                }
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = "txt";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                StreamReader reader = new StreamReader(filePath);
+                commandInputField.Text = reader.ReadToEnd();
             }
         }
     }
