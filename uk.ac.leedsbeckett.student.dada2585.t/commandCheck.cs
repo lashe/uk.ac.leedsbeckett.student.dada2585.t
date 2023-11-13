@@ -10,7 +10,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// <summary>
     /// class responsible for checking the accuracy and comparing command syntaxes against a set of predefined syntaxes to see if they match what is expected
     /// </summary>
-    internal class CommandCheck
+    public class CommandCheck
     {
          string penPositon = @"^moveto \d+, \d+$";
         string runCommand = @"^run$";
