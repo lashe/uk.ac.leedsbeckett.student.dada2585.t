@@ -54,6 +54,7 @@
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Margin = new Padding(3, 2, 3, 2);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -63,14 +64,15 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(pictureBox1);
-            splitContainer1.Size = new Size(1008, 764);
-            splitContainer1.SplitterDistance = 470;
+            splitContainer1.Size = new Size(882, 573);
+            splitContainer1.SplitterDistance = 411;
             splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
             // 
             splitContainer2.Dock = DockStyle.Fill;
             splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Margin = new Padding(3, 2, 3, 2);
             splitContainer2.Name = "splitContainer2";
             splitContainer2.Orientation = Orientation.Horizontal;
             // 
@@ -85,15 +87,17 @@
             splitContainer2.Panel2.Controls.Add(button2);
             splitContainer2.Panel2.Controls.Add(button1);
             splitContainer2.Panel2.Controls.Add(textBox1);
-            splitContainer2.Size = new Size(470, 764);
-            splitContainer2.SplitterDistance = 456;
+            splitContainer2.Size = new Size(411, 573);
+            splitContainer2.SplitterDistance = 342;
+            splitContainer2.SplitterWidth = 3;
             splitContainer2.TabIndex = 0;
             // 
             // button4
             // 
-            button4.Location = new Point(146, 21);
+            button4.Location = new Point(128, 16);
+            button4.Margin = new Padding(3, 2, 3, 2);
             button4.Name = "button4";
-            button4.Size = new Size(94, 29);
+            button4.Size = new Size(82, 22);
             button4.TabIndex = 2;
             button4.Text = "Load";
             button4.UseVisualStyleBackColor = true;
@@ -101,20 +105,23 @@
             // 
             // button3
             // 
-            button3.Location = new Point(27, 21);
+            button3.Location = new Point(24, 16);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(94, 29);
+            button3.Size = new Size(82, 22);
             button3.TabIndex = 1;
             button3.Text = "Save";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            button3.Click += SaveFileButtonClick;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(commandInputField);
-            groupBox2.Location = new Point(3, 61);
+            groupBox2.Location = new Point(3, 46);
+            groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(455, 390);
+            groupBox2.Padding = new Padding(3, 2, 3, 2);
+            groupBox2.Size = new Size(398, 292);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Command Input";
@@ -122,59 +129,61 @@
             // commandInputField
             // 
             commandInputField.Dock = DockStyle.Fill;
-            commandInputField.Location = new Point(3, 23);
+            commandInputField.Location = new Point(3, 18);
+            commandInputField.Margin = new Padding(3, 2, 3, 2);
             commandInputField.Name = "commandInputField";
-            commandInputField.Size = new Size(449, 364);
+            commandInputField.Size = new Size(392, 272);
             commandInputField.TabIndex = 0;
             commandInputField.Text = "";
             // 
             // button2
             // 
-            button2.Location = new Point(178, 6);
+            button2.Location = new Point(156, 4);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(118, 40);
+            button2.Size = new Size(103, 30);
             button2.TabIndex = 2;
             button2.Text = "Syntax Check";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += SyntaxCheckButtonClick;
             // 
             // button1
             // 
-            button1.Image = Properties.Resources.Hopstarter_Button_Button_Play_256;
-            button1.Location = new Point(27, 6);
+            button1.Location = new Point(24, 4);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(109, 40);
+            button1.Size = new Size(95, 30);
             button1.TabIndex = 1;
             button1.Text = "Run";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += RunCommandButtonClick;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 52);
+            textBox1.Location = new Point(10, 39);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(397, 27);
+            textBox1.Size = new Size(348, 23);
             textBox1.TabIndex = 0;
+            textBox1.KeyDown += CommandLine_KeyDown;
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = SystemColors.ActiveBorder;
             pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(534, 436);
+            pictureBox1.Size = new Size(467, 327);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.Paint += pictureBox1_Paint;
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 764);
+            ClientSize = new Size(882, 573);
             Controls.Add(splitContainer1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             splitContainer1.Panel1.ResumeLayout(false);

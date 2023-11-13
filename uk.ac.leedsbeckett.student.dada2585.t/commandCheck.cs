@@ -7,14 +7,28 @@ using System.Threading.Tasks;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
+    /// <summary>
+    /// class responsible for checking the accuracy and comparing command syntaxes against a set of predefined syntaxes to see if they match what is expected
+    /// </summary>
     internal class CommandCheck
     {
-         string penPositon = @"^moveto \d+ \d+$";
-         string drawingPosition = @"^drawto \d+ \d+$";
+         string penPositon = @"^moveto \d+, \d+$";
+        string runCommand = @"^run$";
+        string drawingPosition = @"^drawto \d+, \d+$";
          string drawCircle = @"^circle \d+$";
-         string drawRectangle = @"^rectangle \d+ \d+$";
+         string drawRectangle = @"^rectangle \d+, \d+$";
          string drawTriangle = @"^triangle \d+$";
+         string clearDrawing = @"^clear$";
+         string resetPicture = @"^reset$";
+         string penColour = @"^pen $";
+         string fillShapeOn = @"^fill on$";
+         string fillShapeOff = @"^fill off$";
 
+        /// <summary>
+        /// method used to determine the syntax accuracy of a command
+        /// </summary>
+        /// <param name="command">a string of command to be compared against predefined syntaxes</param>
+        /// <returns></returns>
         public bool CheckCommand( string command)
         {
             if (Regex.IsMatch(command, penPositon, RegexOptions.IgnoreCase) == true)
@@ -34,6 +48,18 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 return true;
             }
             else if (Regex.IsMatch(command, drawRectangle, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, clearDrawing, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, resetPicture, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, runCommand, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }

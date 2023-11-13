@@ -1,87 +1,51 @@
 using System.Collections;
+using System.Drawing;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
+    /// <summary>
+    /// this is the entry poin of the project
+    /// </summary>
     public partial class Form1 : Form
     {
         Bitmap drawBitmap = new Bitmap(534, 436);
-        Pen drawinPen = new Pen(Color.Green, 3);
+        Cursor cursor;
+        CommandParser parser = new CommandParser();
         Boolean mouseDown = false;
         ArrayList shapes = new ArrayList();
-        ArrayList commandList = new ArrayList();
+        List<string> commandList = new List<string>();
         ArrayList errorList = new ArrayList();
+        private Canvas canvas;
         public Form1()
         {
             InitializeComponent();
-
-            //add shapes
-            /*shapes.Add(new Circle(Color.AliceBlue, 10, 100, 100));
-            shapes.Add(new Circle(Color.Fuchsia, 100, 10, 50));
-            shapes.Add(new Rectangle(Color.Beige, 100, 100, 50, 100));
-            shapes.Add(new Triangle(Color.Red, 300, 100, 300));*/
+            // set initial points for cursor
+            cursor = new Cursor(10, 10);
+            StateManager.Instance.X = cursor.X;
+            StateManager.Instance.Y = cursor.Y;
+            canvas = new Canvas(pictureBox1);
+            Pointer pointer = new Pointer(cursor.X, cursor.Y);
+            canvas.AddShape(pointer);
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        /// <summary>
+        /// this is the button for checking the syntax of a command
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SyntaxCheckButtonClick(object sender, EventArgs e)
         {
-
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            // g.DrawImageUnscaled(drawBitmap, 0, 0);
-            for (int i = 0; i < shapes.Count; i++)
-            {
-                Shape s;
-                s = (Shape)shapes[i];
-                s.draw(g);
-                Console.WriteLine(s.ToString());
-            }
-        }
-
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-        }
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!mouseDown)
-            {
-                return;
-            }
-            Graphics g = Graphics.FromImage(drawBitmap);
-            g.DrawLine(drawinPen, e.X, e.Y, e.X + 1, e.Y + 1);
-            Refresh();
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+            Graphics g = pictureBox1.CreateGraphics();
             string[] commands = commandInputField.Lines;
             try
             {
                 if (commandInputField.Text == "")
                 {
                     // error handler
-                    pictureBox1.Image = null;
-                    Graphics g = Graphics.FromImage(drawBitmap);
-                    Font font = new Font("Arial", 10);
-                    Brush brush = Brushes.Red;
-                    string response = "no command entered";
-                    g.DrawString(response, font, brush, 10, 10);
-                    pictureBox1.Image = drawBitmap;
+                    MessageBox.Show("empty input", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     CommandCheck checkCommand = new CommandCheck();
-                    // Graphics g = Graphics.FromImage(drawBitmap);
-                    Graphics graphics = pictureBox1.CreateGraphics();
-                    graphics.Clear(Color.White);
                     for (int i = 0; i < commands.Length; i++)
                     {
                         if (checkCommand.CheckCommand(commands[i]) == true)
@@ -97,9 +61,20 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     }
                     if (errorList.Count > 0)
                     {
-                        // execute command
+                        // throw error
+                        ErrorHandler.HandleError(errorList, g);
+                        pictureBox1.Invalidate();
+
                     }
-                    ErrorHandler.HandleError(errorList, graphics);
+                    else
+                    {
+                        MessageBox.Show("Syntax Ok", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    /*Font font = new Font("Times New Roman", 10);
+                    Brush brush = Brushes.Red;
+                    string response = "Syntax OK";
+                    g.DrawString(response, font, brush, 10, 10);
+                    pictureBox1.Image = drawBitmap;*/
                 }
             }
             catch (Exception ex)
@@ -108,12 +83,68 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        /// <summary>
+        /// button function for reading and executing contents of the programme line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RunCommandButtonClick(object sender, EventArgs e)
+        {
+            Graphics g = pictureBox1.CreateGraphics();
+            // Graphics g = Graphics.FromImage(drawBitmap);
+            string[] commands = commandInputField.Lines;
+            try
+            {
+                if (commandInputField.Text == "")
+                {
+                    // error handler
+                    MessageBox.Show("Syntax Ok", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    // check the syntax for each command in the list of commands
+                    CommandCheck checkCommand = new CommandCheck();
+                    for (int i = 0; i < commands.Length; i++)
+                    {
+                        if (checkCommand.CheckCommand(commands[i]) == true)
+                        {
+                            commandList.Add(commands[i]);
+                        }
+                        else
+                        {
+                            string error = $"error on line {i + 1} at {commands[i]}";
+                            errorList.Add(error);
+                        }
+
+                    }
+                    if (errorList.Count > 0)
+                    {
+                        // throw error
+                        ErrorHandler.HandleError(errorList, g);
+                        pictureBox1.Invalidate();
+
+                    }
+                    parser.ParseCommand(commandList, pictureBox1);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// method for saving commands to text file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveFileButtonClick(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.DefaultExt = "txt";
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            if (commandInputField.Text == null)
+            if (commandInputField.Text == "")
             {
                 Graphics graphics = pictureBox1.CreateGraphics();
 
@@ -137,6 +168,11 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
         }
 
+        /// <summary>
+        /// method forloading text file into the programme line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadFileButtonClick(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -149,6 +185,78 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 {
                     commandInputField.Text = reader.ReadToEnd();
                 }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            //Cursor cursor;
+            //Cursor cur = new Cursor(50, 50);
+            StateManager.Instance.X = 60;
+            StateManager.Instance.Y = 60;
+            Pointer pointer = new Pointer(60, 60);
+            canvas.AddShape(pointer);
+            Lines line = new Lines(10, 10, 50, 50);
+            canvas.AddShape(line);
+            Triangles triangle = new Triangles(10, 10, 60, 60, 40, 40);
+            canvas.AddShape(triangle);
+            Circles circle = new Circles(50, 50, 50);
+            canvas.AddShape(circle);
+            Rectangles rectangle = new Rectangles(40, 40, 70, 50);
+            canvas.AddShape(rectangle);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            canvas.ClearCanvas();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            canvas.ResetCursor();
+        }
+
+        private void CommandLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            Graphics g = Graphics.FromImage(drawBitmap);
+            // Graphics g = pictureBox1.CreateGraphics();
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                try
+                {
+                    CommandCheck checkCommand = new CommandCheck();
+                    if (checkCommand.CheckCommand(textBox1.Text) == true)
+                    {
+                        if (textBox1.Text == "run")
+                        {
+                        }
+                        commandList.Add(textBox1.Text);
+                    }
+                    else
+                    {
+                        string error = $"syntax error on line 1 at {textBox1.Text}";
+                        errorList.Add(error);
+                    }
+                    if (errorList.Count > 0)
+                    {
+                        // throw error
+                        ErrorHandler.HandleError(errorList, g);
+                        pictureBox1.Image = drawBitmap;
+                    }
+                    else if (errorList.Count == 0)
+                    {
+                        parser.ParseCommand(commandList, pictureBox1);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+
             }
         }
     }

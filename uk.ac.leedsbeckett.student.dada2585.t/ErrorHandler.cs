@@ -10,13 +10,13 @@ using System.Windows.Forms;
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
     internal class ErrorHandler
-    {
+    {   
         public static void HandleError(ArrayList errors, Graphics g)
         {
+            g.Clear(Color.White);
             Font font = new Font("Arial", 10);
             Brush brush = Brushes.Red;
             int x = 10;  int y = 10;
-            g.Clear(Color.White);
             foreach (string error in errors)
             {
                 g.DrawString(error, font, brush, x, y);
@@ -24,5 +24,6 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             }
             
         }
+        
     }
 }
