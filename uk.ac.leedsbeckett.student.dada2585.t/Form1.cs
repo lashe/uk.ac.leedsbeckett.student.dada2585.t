@@ -34,7 +34,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         /// <param name="e"></param>
         private void SyntaxCheckButtonClick(object sender, EventArgs e)
         {
-            Graphics g = pictureBox1.CreateGraphics();
+            /*Graphics g = pictureBox1.CreateGraphics();
             string[] commands = commandInputField.Lines;
             try
             {
@@ -70,16 +70,38 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     {
                         MessageBox.Show("Syntax Ok", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    /*Font font = new Font("Times New Roman", 10);
+                    *//*Font font = new Font("Times New Roman", 10);
                     Brush brush = Brushes.Red;
                     string response = "Syntax OK";
                     g.DrawString(response, font, brush, 10, 10);
-                    pictureBox1.Image = drawBitmap;*/
+                    pictureBox1.Image = drawBitmap;*//*
+                }*/
+            string command = textBox1.Text;
+            try
+            {
+                if (textBox1.Text == "")
+                {
+                    // error handler
+                    MessageBox.Show("empty input", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    CommandCheck checkCommand = new CommandCheck();
+                    if (checkCommand.CheckCommand(command) == true)
+                    {
+                        MessageBox.Show("Syntax Ok", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Syntax Error", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -106,9 +128,9 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     CommandCheck checkCommand = new CommandCheck();
                     for (int i = 0; i < commands.Length; i++)
                     {
-                        if (checkCommand.CheckCommand(commands[i]) == true)
+                        if (checkCommand.CheckCommand(commands[i].ToLower()) == true)
                         {
-                            commandList.Add(commands[i]);
+                            commandList.Add(commands[i].ToLower());
                         }
                         else
                         {
@@ -217,6 +239,11 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             canvas.ResetCursor();
         }
 
+        /// <summary>
+        /// method for reading input on the command line immediately a command is entered
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CommandLine_KeyDown(object sender, KeyEventArgs e)
         {
             Graphics g = Graphics.FromImage(drawBitmap);
@@ -227,12 +254,12 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 try
                 {
                     CommandCheck checkCommand = new CommandCheck();
-                    if (checkCommand.CheckCommand(textBox1.Text) == true)
+                    if (checkCommand.CheckCommand(textBox1.Text.ToLower()) == true)
                     {
                         if (textBox1.Text == "run")
                         {
                         }
-                        commandList.Add(textBox1.Text);
+                        commandList.Add(textBox1.Text.ToLower());
                     }
                     else
                     {
