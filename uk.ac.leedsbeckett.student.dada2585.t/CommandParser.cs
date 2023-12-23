@@ -90,6 +90,12 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     // draw triangle
                     int x = StateManager.Instance.X;
                     int y = StateManager.Instance.Y;
+                    int x2 = int.Parse(parameters[1]);
+                    int y2 = int.Parse(parameters[2]);
+                    int x3 = int.Parse(parameters[3]);
+                    int y3 = int.Parse(parameters[4]);
+                    Triangles triangle = new Triangles(x, y, x2, y2, x3, y3);
+                    canvas.AddShape(triangle);
                 }
                 else if (parameters[0] == clearDrawing)
                 {

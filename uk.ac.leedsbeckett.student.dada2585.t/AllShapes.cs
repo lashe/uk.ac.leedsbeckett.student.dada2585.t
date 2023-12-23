@@ -136,7 +136,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             Point C = new Point(X3, Y3);
             Point[] triangle = { A, B, C };
             Pen p = new Pen(Color.Black, 2);
-            gph.FillPolygon(Brushes.Black, triangle);
+            // gph.FillPolygon(Brushes.Black, triangle);
             gph.DrawPolygon(p, triangle);
         }
     }

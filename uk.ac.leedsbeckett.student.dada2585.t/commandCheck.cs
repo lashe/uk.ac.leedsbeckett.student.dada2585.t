@@ -17,7 +17,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string drawingPosition = @"^drawto \d+, \d+$";
          string drawCircle = @"^circle \d+$";
          string drawRectangle = @"^rectangle \d+, \d+$";
-         string drawTriangle = @"^triangle \d+$";
+         string drawTriangle = @"^triangle \d+, \d+, \d+, \d+$";
          string clearDrawing = @"^clear$";
          string resetPicture = @"^reset$";
          string penColour = @"^pen $";
