@@ -8,7 +8,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// </summary>
     public partial class Form1 : Form
     {
-        Bitmap drawBitmap = new Bitmap(534, 436);
+        Bitmap drawBitmap;
         Cursor cursor;
         CommandParser parser = new CommandParser();
         Boolean mouseDown = false;
@@ -21,6 +21,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             InitializeComponent();
             // set initial points for cursor
             cursor = new Cursor(10, 10);
+            drawBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = drawBitmap;
             StateManager.Instance.X = cursor.X;
             StateManager.Instance.Y = cursor.Y;
             canvas = new Canvas(pictureBox1);
@@ -120,7 +122,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 if (commandInputField.Text == "")
                 {
                     // error handler
-                    MessageBox.Show("Syntax Ok", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("command missing", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

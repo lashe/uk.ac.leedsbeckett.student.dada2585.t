@@ -20,7 +20,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
          string drawTriangle = @"^triangle \d+, \d+, \d+, \d+$";
          string clearDrawing = @"^clear$";
          string resetPicture = @"^reset$";
-         string penColour = @"^pen $";
+         string penColour = @"^pen \S+$";
          string fillShapeOn = @"^fill on$";
          string fillShapeOff = @"^fill off$";
 
@@ -60,6 +60,35 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 return true;
             }
             else if (Regex.IsMatch(command, runCommand, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, penColour, RegexOptions.IgnoreCase) == true)
+            {
+                string[] parameters = command.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (parameters[1] == "black")
+                {
+                    return true;
+                }
+                else if (parameters[1] == "red")
+                {
+                    return true;
+                }
+                else if (parameters[1] == "yellow")
+                {
+                    return true;
+                }
+                else if (parameters[1] == "green")
+                {
+                    return true;
+                }
+                return false;
+            }
+            else if (Regex.IsMatch(command, fillShapeOn, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, fillShapeOff, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }
