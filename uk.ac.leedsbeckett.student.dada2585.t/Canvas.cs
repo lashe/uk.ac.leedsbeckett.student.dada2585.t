@@ -74,7 +74,9 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             pictureBox.Invalidate();
             int x = StateManager.Instance.X;
             int y = StateManager.Instance.Y;
-            shapes.Add(new Pointer(x, y));
+            Color color = StateManager.Instance.C;
+            bool fill = StateManager.Instance.F;
+            shapes.Add(new Pointer(color, x, y, fill));
         }
 
         /// <summary>
@@ -85,8 +87,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             shapes.Clear();
             StateManager.Instance.X = 10;
             StateManager.Instance.Y = 10;
+            Color color = StateManager.Instance.C;
+            bool fill = StateManager.Instance.F;
             pictureBox.Invalidate();
-            shapes.Add(new Pointer(10, 10));
+            shapes.Add(new Pointer(color, 10, 10, fill));
             //initializeCanvas();
 
         }

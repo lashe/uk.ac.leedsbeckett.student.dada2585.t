@@ -15,7 +15,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         public int X { get; set; }
         public int Y { get; set; }
         public bool F { get; set; }
-        public string C { get; set; }
+        public Color C { get; set; }
         private StateManager() { }
         public static StateManager Instance
         {

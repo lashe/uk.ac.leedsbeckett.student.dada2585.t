@@ -10,33 +10,45 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// <summary>
     /// this is class that handles getting and setting the shape parameters for drawing a Circle
     /// </summary>
-    public class Circles: SShapes
+    public class Circles : SShapes
     {
-        public int X {  get; set; }
-        public int Y { get; set; }
-        public int Radius { get; set; }
+       /* public int X {  get; set; }
+        public int Y { get; set; }*/
+        protected int Radius { get; set; }
 
         /// <summary>
         /// drawing a circle
         /// </summary>
+        /// <param name="colour"></param>
         /// <param name="x">the x coordinate for a bitmap</param>
         /// <param name="y">the y coordinates for a bitmap</param>
+        /// <param name="fill"></param>
         /// <param name="radius">the radius of the circle to be drawn</param>
-        public Circles(int x, int y, int radius) 
+        public Circles(Color colour, int x, int y, bool fill, int radius) : base(colour, x, y, fill)
         { 
-            X = x;
-            Y = y;
+            /*X = x;
+            Y = y;*/
             Radius = radius;
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="gph">this is the graphics parameter used for rendering the drawn shape</param>
-        public void Draw(Graphics gph)
+        /// <param name="g">this is the graphics parameter used for rendering the drawn shape</param>
+        public override void Draw(Graphics gph)
+        
         {
-            Pen p = new Pen(Color.Black, 2);
-            gph.FillEllipse(Brushes.Transparent, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
-            gph.DrawEllipse(p, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
+            Pen p = new Pen(colour, 2);
+            SolidBrush sb;
+            if (fill)
+            {
+                sb = new SolidBrush(colour);
+            }
+            else
+            {
+                sb = new SolidBrush(Color.Transparent);
+            }
+            gph.FillEllipse(sb, x - Radius, y - Radius, 2 * Radius, 2 * Radius);
+            gph.DrawEllipse(p, x - Radius, y - Radius, 2 * Radius, 2 * Radius);
         }
     }
     /// <summary>
@@ -44,29 +56,41 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// </summary>
     public class Rectangles : SShapes
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        /*public int X { get; set; }
+        public int Y { get; set; }*/
         public int Width { get; set; }
         public int Height { get; set; }
-/// <summary>
-/// method for drawing a rectangle
-/// </summary>
-/// <param name="x">the x coordinates</param>
-/// <param name="y">the y coordinates</param>
-/// <param name="width">width of the rectangle to be drawn</param>
-/// <param name="height">height of the rectangle to be drawn</param>
-        public Rectangles(int x, int y, int width, int height)
+        /// <summary>
+        /// method for drawing a rectangle
+        /// </summary>
+        /// <param name="colour"></param>
+        /// <param name="x">the x coordinates</param>
+        /// <param name="y">the y coordinates</param>
+        /// <param name="fill"></param>
+        /// <param name="width">width of the rectangle to be drawn</param>
+        /// <param name="height">height of the rectangle to be drawn</param>
+        public Rectangles(Color colour, int x, int y, bool fill, int width, int height) : base(colour, x, y, fill)
         {
-            X = x;
-            Y = y;
+            /*X = x;
+            Y = y;*/
             Width = width;
             Height = height;
         }
-        public void Draw(Graphics gph)
+        public override void Draw(Graphics gph)
+        
         {
-            Pen p = new Pen(Color.Black, 2);
-            gph.FillRectangle(Brushes.Transparent, X, Y, Width, Height);
-            gph.DrawRectangle(p, X, Y, Width, Height);
+            Pen p = new Pen(colour, 2);
+            SolidBrush sb;
+            if (fill)
+            {
+                sb = new SolidBrush(colour);
+            }
+            else
+            {
+                sb = new SolidBrush(Color.Transparent);
+            }
+            gph.FillRectangle(sb, x, y, Width, Height);
+            gph.DrawRectangle(p, x, y, Width, Height);
         }
     }
     /// <summary>
@@ -74,29 +98,32 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// </summary>
     public class Lines : SShapes
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        /*public int X { get; set; }
+        public int Y { get; set; }*/
         public int X2 { get; set; }
         public int Y2 { get; set; }
 
         /// <summary>
         /// method for drawing a line
         /// </summary>
+        /// <param name="colour"></param>
         /// <param name="x">x coordinate for the starting point of the line</param>
         /// <param name="y">y coordinate for the starting point of the line</param>
+        /// <param name="fill"></param>
         /// <param name="x2">x coordinate of the end point of the line</param>
         /// <param name="y2">y coordinate of the end point of the line</param>
-        public Lines(int x, int y, int x2, int y2)
+        public Lines(Color colour, int x, int y, bool fill, int x2, int y2) : base(colour, x, y, fill)
         {
-            X = x;
-            Y = y;
+           /* X = x;
+            Y = y;*/
             X2 = x2;
             Y2 = y2;
         }
-        public void Draw(Graphics gph)
+        public override void Draw(Graphics gph)
+        
         {
-            Pen p = new Pen(Color.Black, 2);
-            gph.DrawLine(p, X, Y, X2, Y2);
+            Pen p = new Pen(colour, 2);
+            gph.DrawLine(p, x, y, X2, Y2);
         }
     }
     /// <summary>
@@ -104,8 +131,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// </summary>
     public class Triangles : SShapes
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+       /* public int X { get; set; }
+        public int Y { get; set; }*/
         public int X2 { get; set; }
         public int Y2 { get; set; }
         public int X3 { get; set; }
@@ -114,29 +141,40 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         /// method for drawing triangle
         /// below are the X and Y points for drawing the triangle
         /// </summary>
+        /// <param name="colour"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
+        /// <param name="fill"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <param name="x3"></param>
         /// <param name="y3"></param>
-        public Triangles(int x, int y, int x2, int y2, int x3, int y3)
+        public Triangles(Color colour, int x, int y, bool fill, int x2, int y2, int x3, int y3) : base(colour, x, y, fill)
         {
-            X = x;
-            Y = y;
+            /*X = x;
+            Y = y;*/
             X2 = x2;
             Y2 = y2;
             X3 = x3;
             Y3 = y3;
         }
-        public void Draw(Graphics gph)
+        public override void Draw(Graphics gph)
         {
-            Point A = new Point(X, Y);
+            Point A = new Point(x, y);
             Point B = new Point(X2, Y2);
             Point C = new Point(X3, Y3);
             Point[] triangle = { A, B, C };
             Pen p = new Pen(Color.Black, 2);
-            // gph.FillPolygon(Brushes.Black, triangle);
+            SolidBrush sb;
+            if (fill)
+            {
+                sb = new SolidBrush(colour);
+            }
+            else
+            {
+                sb = new SolidBrush(Color.Transparent);
+            }
+            gph.FillPolygon(sb, triangle);
             gph.DrawPolygon(p, triangle);
         }
     }
@@ -145,23 +183,22 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// </summary>
     public class Pointer : SShapes
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        /*public int X { get; set; }
+        public int Y { get; set; }*/
 
-        public Pointer(int x, int y)
+        public Pointer(Color colour, int x, int y, bool fill) : base(colour, x, y, fill)
         {
-            X = x;
-            Y = y;
+            
         }
-        public void Draw(Graphics gph)
+        public override void Draw(Graphics gph)
         {
             Pen p = new Pen(Color.Green, 2);
-            gph.FillEllipse(Brushes.Green, X, Y, 5, 5);
-            gph.DrawEllipse(p, X, Y, 5, 5);
+            gph.FillEllipse(Brushes.Green, x, y, 5, 5);
+            gph.DrawEllipse(p, x, y, 5, 5);
         }
     }
 
-    public class Strings : SShapes
+    public class Strings
     {
         public int X { get; set; }
         public int Y { get; set; }

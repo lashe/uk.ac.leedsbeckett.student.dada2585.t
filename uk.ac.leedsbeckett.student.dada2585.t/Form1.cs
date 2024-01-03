@@ -25,8 +25,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             pictureBox1.Image = drawBitmap;
             StateManager.Instance.X = cursor.X;
             StateManager.Instance.Y = cursor.Y;
+            StateManager.Instance.F = false;
+            StateManager.Instance.C = Color.Black;
             canvas = new Canvas(pictureBox1);
-            Pointer pointer = new Pointer(cursor.X, cursor.Y);
+            Pointer pointer = new Pointer(Color.Black, cursor.X, cursor.Y, false);
             canvas.AddShape(pointer);
         }
         /// <summary>
@@ -217,7 +219,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
             //Cursor cursor;
             //Cursor cur = new Cursor(50, 50);
-            StateManager.Instance.X = 60;
+            /*StateManager.Instance.X = 60;
             StateManager.Instance.Y = 60;
             Pointer pointer = new Pointer(60, 60);
             canvas.AddShape(pointer);
@@ -228,7 +230,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             Circles circle = new Circles(50, 50, 50);
             canvas.AddShape(circle);
             Rectangles rectangle = new Rectangles(40, 40, 70, 50);
-            canvas.AddShape(rectangle);
+            canvas.AddShape(rectangle);*/
         }
 
         private void button6_Click(object sender, EventArgs e)
