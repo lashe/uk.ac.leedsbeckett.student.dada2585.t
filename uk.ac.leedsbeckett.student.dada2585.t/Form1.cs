@@ -114,9 +114,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RunCommandButtonClick(object sender, EventArgs e)
+        public void RunCommandButtonClick(object sender, EventArgs e)
         {
-            Graphics g = pictureBox1.CreateGraphics();
+            RunCommand.Run_Command(pictureBox1, commandInputField);
+            /*Graphics g = pictureBox1.CreateGraphics();
             // Graphics g = Graphics.FromImage(drawBitmap);
             string[] commands = commandInputField.Lines;
             try
@@ -157,7 +158,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             {
                 Console.WriteLine(ex);
                 MessageBox.Show(ex.ToString());
-            }
+            }*/
         }
 
         /// <summary>
@@ -278,7 +279,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     }
                     else if (errorList.Count == 0)
                     {
-                        parser.ParseCommand(commandList, pictureBox1);
+                        parser.ParseCommand(commandList, pictureBox1, commandInputField);
                     }
 
                 }

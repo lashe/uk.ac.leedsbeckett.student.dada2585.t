@@ -25,15 +25,16 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string drawTriangle = "triangle";
         string clearDrawing = "clear";
         string resetPicture = "reset";
-        string penColour = @"pen";
-        string fillShape = @"fill";
+        string penColour = "pen";
+        string fillShape = "fill";
+        string runCommand = "run";
 
         /// <summary>
         /// the method for handling a parsed commands
         /// </summary>
         /// <param name="commands">list of commads to be executed</param>
         /// <param name="pictureBox">picture box control for rendering the commands</param>
-        public void ParseCommand(List<string> commands, PictureBox pictureBox)
+        public void ParseCommand(List<string> commands, PictureBox pictureBox, RichTextBox commandInputField)
         {
             int x = StateManager.Instance.X;
             int y = StateManager.Instance.Y;
@@ -91,7 +92,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     Triangles triangle = new Triangles(color, x, y,fill, x2, y2, x3, y3);
                     canvas.AddShape(triangle);
                 }
-                else if (parameters[0] == clearDrawing)
+                else if (commands[i] == clearDrawing)
                 {
                     // clear all drawing
                     canvas.ClearCanvas();
@@ -101,7 +102,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     //pictureBox.Invalidate();
 
                 }
-                else if (parameters[0] == resetPicture)
+                else if (commands[i] == resetPicture)
                 {
                     // clear picturebox and return cursor to starting point
                     canvas.ResetCursor();
@@ -152,6 +153,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                         throw new ArgumentException($"Unrecognized command pen: {parameters[1]}");
 
                     }
+                }
+                else if (commands[i] == runCommand)
+                {
+                    RunCommand.Run_Command(pictureBox, commandInputField);
                 }
             }
         }
