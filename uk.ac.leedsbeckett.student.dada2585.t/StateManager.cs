@@ -9,7 +9,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// <summary>
     /// class responsible for storing, updating and providing variables that are used across any and allclasses
     /// </summary>
-    internal class StateManager
+    public class StateManager
     {
         private static StateManager instance;
         public int X { get; set; }

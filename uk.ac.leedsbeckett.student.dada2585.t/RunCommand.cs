@@ -8,13 +8,10 @@ using System.Windows.Forms;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
-    /// <summary>
-    /// class for handling the run sytax in the command line
-    /// </summary>
     public class RunCommand
     {
         /// <summary>
-        /// 
+        /// class that handles the run syntax and executes the command
         /// </summary>
         /// <param name="pictureBox1"></param>
         /// <param name="commandInputField"></param>

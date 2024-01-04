@@ -42,13 +42,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PictureBox_Paint(object sender, PaintEventArgs e)
-        {
-            //DrawPointer(e.Graphics);
-            
+        {            
              foreach (SShapes shape in shapes)
             {
                 shape.Draw(e.Graphics);
-                // cursor.DrawCursor(e.Graphics);
             }
         }
         /// <summary>
@@ -60,11 +57,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             shapes.Add(shape);
             pictureBox.Invalidate();
         }
-        private void DrawPointer(Graphics g)
-        {
-            /*Pointer pointer = new Pointer();
-            pointer.Draw(g);*/
-        }
+
         /// <summary>
         /// method for clearing the canvas off all drawings
         /// </summary>

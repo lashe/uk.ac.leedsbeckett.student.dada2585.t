@@ -117,11 +117,12 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 }
                 else if (parameters[0] == fillShape)
                 {
-                    // clear picturebox and return cursor to starting point
+                    // turn fill on to fill shapes with colour
                     if (parameters[1] == "on")
                     {
                         StateManager.Instance.F = true;
                     }
+                    // turn fill off to outline shape
                     else if (parameters[1] == "off")
                     {
                         StateManager.Instance.F = false;
@@ -129,6 +130,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 }
                 else if (parameters[0] == penColour)
                 {
+                    // change pen colour
                     Color SetColour;
 
                     switch (parameters[1])
@@ -150,7 +152,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                             StateManager.Instance.C = SetColour;
                             break;
                         default:
-                        throw new ArgumentException($"Unrecognized command pen: {parameters[1]}");
+                        throw new ArgumentException($"Invalid command pen {parameters[1]}");
 
                     }
                 }
@@ -158,6 +160,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 {
                     RunCommand.Run_Command(pictureBox, commandInputField);
                 }
+                throw new InvalidOperationException($"Invalid command {commands[i]}");
             }
         }
     }
