@@ -34,7 +34,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 else
                 {
                     // check the syntax for each command in the list of commands
-                    CommandCheck checkCommand = new CommandCheck();
+                    CommandChecker checkCommand = new CommandChecker();
                     for (int i = 0; i < commands.Length; i++)
                     {
                         if (checkCommand.CheckCommand(commands[i].ToLower()) == true)

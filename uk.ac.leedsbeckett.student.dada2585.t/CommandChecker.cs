@@ -10,13 +10,13 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
     /// <summary>
     /// class responsible for checking the accuracy and comparing command syntaxes against a set of predefined syntaxes to see if they match what is expected
     /// </summary>
-    public class CommandCheck
+    public class CommandChecker
     {
         string penPositon = @"^moveto \d+, \d+$";
         string runCommand = @"^run$";
         string drawingPosition = @"^drawto \d+, \d+$";
-        string drawCircle = @"^circle \d+$";
-        string drawRectangle = @"^rectangle \d+, \d+$";
+        string drawCircle = "circle";
+        string drawRectangle = "rectangle";
         string drawTriangle = @"^triangle \d+, \d+, \d+, \d+$";
         string clearDrawing = @"^clear$";
         string resetPicture = @"^reset$";
@@ -26,7 +26,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string expression = @"^\S+ = \d+$";
         string expression2 = @"^\S+ = \S+ + \S+$";
         string expression3 = @"^\S+ = \S++\S+$";
-        string expression4 = @"^\S+ = \S++\S+$";
+        string expression4 = @"^\S+ = \S++\d+$";
+        string expression5 = @"^\S+ = \S+ + \d+$";
 
         /// <summary>
         /// method used to determine the syntax accuracy of a command
@@ -35,6 +36,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         /// <returns></returns>
         public bool CheckCommand( string command)
         {
+            string[] parameters = command.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
             if (Regex.IsMatch(command, penPositon, RegexOptions.IgnoreCase) == true)
             {
                 return true;
@@ -43,17 +45,32 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             {
                 return true;
             }
-            else if( Regex.IsMatch(command, drawCircle, RegexOptions.IgnoreCase) == true)
+            else if (parameters[0] == drawCircle && parameters.Length == 2)
             {
-                return true;
+                if ((int.TryParse(parameters[1], out int result) && result > 0))
+                {
+                    return true;
+                }
+                else if (!int.TryParse(parameters[1], out int result2) && parameters[1] is string)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if(Regex.IsMatch(command, drawTriangle, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }
-            else if (Regex.IsMatch(command, drawRectangle, RegexOptions.IgnoreCase) == true)
+            else if (parameters[0] == drawRectangle && parameters.Length == 3)
             {
-                return true;
+                if ((int.TryParse(parameters[1], out int result) && result > 0 || parameters[1] is string) && (int.TryParse(parameters[2], out int result2) && result2 > 0 || parameters[2] is string))
+                {
+                    return true;
+                }
+                return false;
             }
             else if (Regex.IsMatch(command, clearDrawing, RegexOptions.IgnoreCase) == true)
             {
@@ -69,7 +86,6 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             }
             else if (Regex.IsMatch(command, penColour, RegexOptions.IgnoreCase) == true)
             {
-                string[] parameters = command.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (parameters[1] == "black")
                 {
                     return true;
@@ -104,7 +120,11 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             {
                 return true;
             }
-            else if (Regex.IsMatch(command, expression2, RegexOptions.IgnoreCase) == true)
+            else if (Regex.IsMatch(command, expression2, RegexOptions.IgnoreCase) == true || Regex.IsMatch(command, expression3, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, expression4, RegexOptions.IgnoreCase) == true || Regex.IsMatch(command, expression5, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }

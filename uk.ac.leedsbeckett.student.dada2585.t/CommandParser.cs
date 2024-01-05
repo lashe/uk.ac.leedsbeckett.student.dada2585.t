@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
@@ -28,6 +29,9 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string penColour = "pen";
         string fillShape = "fill";
         string runCommand = "run";
+        string expression = @"^\S+ = \d+$";
+        string expression2 = @"^\S+ = \S+ + \S+$";
+        string expression3 = @"^\S+ = \S++\S+$";
 
         /// <summary>
         /// the method for handling a parsed commands
@@ -68,18 +72,42 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 else if (parameters[0] == drawCircle)
                 {
                     // draw circle
-                    int r = int.Parse(parameters[1]);
-                    Circles circle = new Circles(color, x, y, fill, r);
-                    canvas.AddShape(circle);
+                    if(int.TryParse(parameters[1], out int result) && result > 0)
+                    {
+                        int r = int.Parse(parameters[1]);
+                        Circles circle = new Circles(color, x, y, fill, r);
+                        canvas.AddShape(circle);
+                    }
+                    else
+                    {
+                        object v1 = VariablesHandler.GetVariable(parameters[1]);
+                        int r = int.Parse($"{v1}");
+                        Circles circle = new Circles(color, x, y, fill, r);
+                        canvas.AddShape(circle);
+                    }
+                    
 
                 }
                 else if (parameters[0] == drawRectangle)
                 {
-                    // draw rectangle
-                    int w = int.Parse(parameters[1]);
-                    int h = int.Parse(parameters[2]);
-                    Rectangles rectangle = new Rectangles(color, x, y, fill, w, h);
-                    canvas.AddShape(rectangle);
+                    if (int.TryParse(parameters[1], out int result) && int.TryParse(parameters[2], out int result2))
+                    {
+                        // draw rectangle
+                        int w = int.Parse(parameters[1]);
+                        int h = int.Parse(parameters[2]);
+                        Rectangles rectangle = new Rectangles(color, x, y, fill, w, h);
+                        canvas.AddShape(rectangle);
+                    }
+                    else
+                    {
+                        var v1 = VariablesHandler.GetVariable(parameters[1]);
+                        var v2 = VariablesHandler.GetVariable(parameters[2]);
+                        int w = int.Parse($"{v1}");
+                        int h = int.Parse($"{v2}");
+                        Rectangles rectangle = new Rectangles(color, x, y, fill, w, h);
+                        canvas.AddShape(rectangle);
+                    }
+                    
 
                 }
                 else if (parameters[0] == drawTriangle)
@@ -160,7 +188,22 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 {
                     RunCommand.Run_Command(pictureBox, commandInputField);
                 }
-                throw new InvalidOperationException($"Invalid command {commands[i]}");
+                else if (Regex.IsMatch(commands[i], expression, RegexOptions.IgnoreCase) == true)
+                {
+                    string variableName = parameters[0];
+                    string variableValue = parameters[2];
+                    VariablesHandler.SetVariable(variableName, variableValue);
+                }
+                else if (Regex.IsMatch(commands[i], expression2, RegexOptions.IgnoreCase) == true)
+                {
+                    string variableName = parameters[0];
+                    string variableValue = parameters[1];
+                    VariablesHandler.SetVariable(variableName, variableValue);
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Invalid command {commands[i]}");
+                }
             }
         }
     }

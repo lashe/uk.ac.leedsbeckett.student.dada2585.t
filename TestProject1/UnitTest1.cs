@@ -16,9 +16,14 @@ namespace TestProject1
         [Test]
         public void CommandInput()
         {
+            // Arrange
             string command = "drawto 10, 10";
             CommandCheck commandCheck = new CommandCheck();
+
+            // Act
             commandCheck.CheckCommand(command);
+
+            // Assert
             Assert.IsTrue(true);
         }
 
@@ -28,7 +33,17 @@ namespace TestProject1
         [Test]
         public void DrawCircleCommand()
         {
-            var DrawCircle = new Circles(Color.Black, 15, 15, false, 100);
+            // Arrange
+            Color color = Color.Black;
+            int x = 15;
+            int y = 15;
+            int r = 100;
+            bool fill = false;
+
+            // Act
+            var DrawCircle = new Circles(color, x, y, fill, r);
+
+            //Assert
             Assert.IsNotNull(DrawCircle);
         }
 
@@ -38,7 +53,18 @@ namespace TestProject1
         [Test]
         public void DrawRectangleCommand()
         {
-            var DrawRectangle = new Rectangles(Color.Red, 15, 15, false, 100, 200);
+            // Arrange
+            Color color = Color.Red;
+            int x = 15;
+            int y = 15;
+            int h = 100;
+            int w = 200;
+            bool fill = true;
+
+            // Act
+            var DrawRectangle = new Rectangles(color, x, y, fill, w, h);
+
+            // Assert
             Assert.IsNotNull(DrawRectangle);
         }
 
@@ -48,7 +74,20 @@ namespace TestProject1
         [Test]
         public void DrawTriangleCommand()
         {
-            var DrawTriangle = new Triangles(Color.Red, 15, 15, false, 100, 200, 300, 500);
+            // Arrange 
+            Color color = Color.Yellow;
+            int x = 15;
+            int y = 15;
+            int x2 = 100;
+            int y2 = 200;
+            int x3 = 300;
+            int y3 = 500;
+            bool fill = false;
+
+            // Act
+            var DrawTriangle = new Triangles(color, x, y, fill, x2, y2, x3, y3);
+
+            // Assert
             Assert.IsNotNull(DrawTriangle);
         }
 
@@ -58,7 +97,19 @@ namespace TestProject1
         [Test]
         public void DrawLineCommand()
         {
-            var DrawLine = new Lines(Color.Red, 15, 15, false, 100, 200);
+
+            // Arrange 
+            Color color = Color.Yellow;
+            int x = 15;
+            int y = 15;
+            int x2 = 100;
+            int y2 = 200;
+            bool fill = false;
+
+            // Act
+            var DrawLine = new Lines(color, x, y, fill, x2, y2);
+
+            // Assert
             Assert.IsNotNull(DrawLine);
         }
 
@@ -68,8 +119,47 @@ namespace TestProject1
         [Test]
         public void MoveCursorCommand()
         {
-            var MovePoints = new Pointer(Color.Red, 100, 150, false);
+            // Arrange
+            Color color = Color.Black;
+            int x = 15;
+            int y = 15;
+            bool fill = true;
+
+            // Act
+            var MovePoints = new Pointer(color, x, y, fill);
+
+            // Assert
             Assert.IsNotNull(MovePoints);
+        }
+
+        [Test]
+        public void CreateVariable()
+        {
+            // Arrange
+            string variableName = "size";
+            string variableValue = "10";
+
+            // Act
+            VariablesHandler.SetVariable(variableName, variableValue);
+
+            // Assert
+            object actualSetValue = VariablesHandler.GetVariable(variableName);
+            object v = actualSetValue;
+            Assert.IsNotNull(v);
+            Assert.AreEqual(variableValue, actualSetValue);
+        }
+
+        [Test]
+        public void GetVariable()
+        {
+            // Arrange
+            string variableName = "size";
+
+            // Act
+            object getValue = VariablesHandler.GetVariable(variableName);
+
+            // Assert
+            Assert.IsNotNull(getValue);
         }
 
         /*[Test]

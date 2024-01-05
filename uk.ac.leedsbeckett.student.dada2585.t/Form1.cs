@@ -11,7 +11,6 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         Bitmap drawBitmap;
         Cursor cursor;
         CommandParser parser = new CommandParser();
-        Boolean mouseDown = false;
         ArrayList shapes = new ArrayList();
         List<string> commandList = new List<string>();
         ArrayList errorList = new ArrayList();
@@ -48,8 +47,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 }
                 else
                 {
-                    CommandCheck checkCommand = new CommandCheck();
-                    if (checkCommand.CheckCommand(command) == true)
+                    CommandChecker checkCommand = new CommandChecker();
+                    if (checkCommand.CheckCommand(command.ToLower()) == true)
                     {
                         MessageBox.Show("Syntax Ok", "Syntax Check", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
@@ -145,11 +144,12 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 e.SuppressKeyPress = true;
                 try
                 {
-                    CommandCheck checkCommand = new CommandCheck();
+                    CommandChecker checkCommand = new CommandChecker();
                     if (checkCommand.CheckCommand(textBox1.Text.ToLower()) == true)
                     {
-                        if (textBox1.Text == "run")
+                        if (textBox1.Text.ToLower() == "run")
                         {
+                            RunCommand.Run_Command(pictureBox1, commandInputField);
                         }
                         commandList.Add(textBox1.Text.ToLower());
                     }
