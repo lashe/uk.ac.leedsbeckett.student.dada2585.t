@@ -38,6 +38,7 @@
             button1 = new Button();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
+            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.Controls.Add(button5);
             splitContainer2.Panel2.Controls.Add(button2);
             splitContainer2.Panel2.Controls.Add(button1);
             splitContainer2.Panel2.Controls.Add(textBox1);
@@ -177,6 +179,16 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // button5
+            // 
+            button5.Location = new Point(44, 94);
+            button5.Name = "button5";
+            button5.Size = new Size(75, 23);
+            button5.TabIndex = 3;
+            button5.Text = "button5";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -212,5 +224,6 @@
         private PictureBox pictureBox1;
         private Button button4;
         private Button button3;
+        private Button button5;
     }
 }

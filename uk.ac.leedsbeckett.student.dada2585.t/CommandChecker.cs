@@ -28,6 +28,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string expression3 = @"^\S+ = \S++\S+$";
         string expression4 = @"^\S+ = \S++\d+$";
         string expression5 = @"^\S+ = \S+ + \d+$";
+        string ifExpression = @"^\if \S+ == \d+$";
+        string endIf = @"^endif$";
+        string thread = @"^thread$";
+
 
         /// <summary>
         /// method used to determine the syntax accuracy of a command
@@ -125,6 +129,14 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 return true;
             }
             else if (Regex.IsMatch(command, expression4, RegexOptions.IgnoreCase) == true || Regex.IsMatch(command, expression5, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, ifExpression, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, thread, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }

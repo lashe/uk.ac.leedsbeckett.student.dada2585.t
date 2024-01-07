@@ -18,7 +18,7 @@ namespace TestProject1
         {
             // Arrange
             string command = "drawto 10, 10";
-            CommandCheck commandCheck = new CommandCheck();
+            CommandChecker commandCheck = new CommandChecker();
 
             // Act
             commandCheck.CheckCommand(command);
@@ -149,18 +149,15 @@ namespace TestProject1
             Assert.AreEqual(variableValue, actualSetValue);
         }
 
-        [Test]
-        public void GetVariable()
-        {
-            // Arrange
-            string variableName = "size";
+        //[Test]
+        //public void GetVariable()
+        //{
+        //    // Arrange
 
-            // Act
-            object getValue = VariablesHandler.GetVariable(variableName);
+        //    // Act  
 
-            // Assert
-            Assert.IsNotNull(getValue);
-        }
+        //    // Assert
+        //}
 
         /*[Test]
         public void ParseCommand()

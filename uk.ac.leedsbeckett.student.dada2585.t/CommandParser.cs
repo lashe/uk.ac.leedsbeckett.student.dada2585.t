@@ -32,6 +32,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string expression = @"^\S+ = \d+$";
         string expression2 = @"^\S+ = \S+ + \S+$";
         string expression3 = @"^\S+ = \S++\S+$";
+        string expression4 = @"^\S+ = \S++\d+$";
+        string expression5 = @"^\S+ = \S+ + \d+$";
+        string ifExpression = @"^\if \S+ == \d+$";
+        string endIf = @"^endif$";
 
         /// <summary>
         /// the method for handling a parsed commands
@@ -199,6 +203,25 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     string variableName = parameters[0];
                     string variableValue = parameters[1];
                     VariablesHandler.SetVariable(variableName, variableValue);
+                }
+                else if (Regex.IsMatch(commands[i], ifExpression, RegexOptions.IgnoreCase) == true)
+                {
+                    List<string> commandList = new List<string>();
+                    var v1 = VariablesHandler.GetVariable(parameters[1]);
+                    int a = int.Parse($"{v1}");
+                    int b = int.Parse(parameters[3]);
+                    if(a == b)
+                    {
+                        for (int j = i+1; j < commands.Count; j++)
+                        {
+                            if (commands[j] == endIf)
+                            {
+                                break;
+                            }
+                            commandList.Add(commands[j].ToLower());
+                        }
+                        this.ParseCommand(commandList, pictureBox, commandInputField);
+                    }
                 }
                 else
                 {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
@@ -56,7 +57,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     {
                         MessageBox.Show("Syntax Error", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -177,6 +178,34 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
 
             }
+        }
+
+        /// <summary>
+        /// method for initialising the Thread function for drawing multiples shapes at the same time
+        /// </summary>
+        public void InitiateThread()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Circles circle = new Circles(Color.AliceBlue, 100*i, 50 * i, false, 50 * i);
+                canvas.AddShape(circle);
+                pictureBox1.BeginInvoke((MethodInvoker)delegate
+                {
+                    canvas.AddShape(circle);
+                });
+                Thread.Sleep(50);
+            }
+        }
+
+        /// <summary>
+        /// button function for initializing the thread call
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Thread drawShapesThread = new Thread(InitiateThread);
+            drawShapesThread.Start();
         }
     }
 }
