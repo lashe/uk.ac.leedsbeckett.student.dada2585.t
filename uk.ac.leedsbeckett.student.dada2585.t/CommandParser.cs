@@ -31,11 +31,13 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string runCommand = "run";
         string expression = @"^\S+ = \d+$";
         string expression2 = @"^\S+ = \S+ + \S+$";
-        string expression3 = @"^\S+ = \S++\S+$";
-        string expression4 = @"^\S+ = \S++\d+$";
+        string expression3 = @"^\S+ = \S+\s*\+\s*\S+$";
+        string expression4 = @"^\S+ = \S+\s*\+\s*\d+$";
         string expression5 = @"^\S+ = \S+ + \d+$";
-        string ifExpression = @"^\if \S+ == \d+$";
+        string ifExpression = @"^if \S+ == \d+$";
         string endIf = @"^endif$";
+        string method = @"method (?<methodName>\w+)(?<parameters>\(.+?\))";
+        string endMethod = @"^endMethod$";
 
         /// <summary>
         /// the method for handling a parsed commands
@@ -51,6 +53,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             Canvas canvas = new Canvas(pictureBox);
             for (int i = 0; i < commands.Count; i++)
             {
+                
                 string[] parameters = commands[i].Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (parameters[0] == penPositon )
                 {
@@ -214,7 +217,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     {
                         for (int j = i+1; j < commands.Count; j++)
                         {
-                            if (commands[j] == endIf)
+                            if (Regex.IsMatch(commands[j], endIf, RegexOptions.IgnoreCase) == true)
                             {
                                 break;
                             }
@@ -222,6 +225,24 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                         }
                         this.ParseCommand(commandList, pictureBox, commandInputField);
                     }
+                }
+                else if (Regex.IsMatch(commands[i], method, RegexOptions.IgnoreCase) == true)
+                {
+                    String[] command = new string[0];
+                    Match match = Regex.Match(commands[i], method, RegexOptions.IgnoreCase);
+                    string MethodName = match.Groups["methodName"].Value;
+                    string variableValue = match.Groups["parameters"].Value;
+                    MethodsHandler.SetMethod(MethodName, variableValue);
+                    for (int j = i + 1; j < commands.Count; j++)
+                    {
+                        if (Regex.IsMatch(commands[j], endMethod, RegexOptions.IgnoreCase) == true)
+                        {
+                            break;
+                        }
+                        command.Append(commands[j].ToLower());
+                    }
+                    string methodCommands = string.Join(", ", command);
+                    Console.WriteLine(methodCommands);
                 }
                 else
                 {

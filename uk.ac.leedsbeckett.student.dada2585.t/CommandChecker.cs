@@ -25,12 +25,14 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string fillShapeOff = @"^fill off$";
         string expression = @"^\S+ = \d+$";
         string expression2 = @"^\S+ = \S+ + \S+$";
-        string expression3 = @"^\S+ = \S++\S+$";
-        string expression4 = @"^\S+ = \S++\d+$";
+        string expression3 = @"^\S+ =\S+\s*\+\s*\S+$";
+        string expression4 = @"^\S+ = \S+\s*\+\s*\d+$";
         string expression5 = @"^\S+ = \S+ + \d+$";
-        string ifExpression = @"^\if \S+ == \d+$";
+        string ifExpression = @"^if \S+ == \d+$";
         string endIf = @"^endif$";
         string thread = @"^thread$";
+        string method = @"method (?<methodName>\w+)(?<parameters>\(.+?\))";
+        string endMethod = @"^endMethod$";
 
 
         /// <summary>
@@ -136,7 +138,19 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             {
                 return true;
             }
+            else if (Regex.IsMatch(command, endIf, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
             else if (Regex.IsMatch(command, thread, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, method, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, endMethod, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }

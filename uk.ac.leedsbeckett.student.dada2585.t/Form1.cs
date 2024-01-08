@@ -12,7 +12,6 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         Bitmap drawBitmap;
         Cursor cursor;
         CommandParser parser = new CommandParser();
-        ArrayList shapes = new ArrayList();
         List<string> commandList = new List<string>();
         ArrayList errorList = new ArrayList();
         private Canvas canvas;

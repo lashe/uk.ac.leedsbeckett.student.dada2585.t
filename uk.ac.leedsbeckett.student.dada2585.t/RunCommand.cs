@@ -33,6 +33,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 }
                 else
                 {
+                    //handling special commands
+
                     // check the syntax for each command in the list of commands
                     CommandChecker checkCommand = new CommandChecker();
                     for (int i = 0; i < commands.Length; i++)
