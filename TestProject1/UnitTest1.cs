@@ -132,6 +132,30 @@ namespace TestProject1
             Assert.IsNotNull(MovePoints);
         }
 
+        /// <summary>
+        /// test to for fill on command
+        /// </summary>
+        [Test] public void fillShapeOn() 
+        {
+            // Act
+            StateManager.Instance.F = true;
+
+            // Assert
+            Assert.IsTrue(StateManager.Instance.F);
+        }
+        /// <summary>
+        /// test for fill off command
+        /// </summary>
+        [Test]
+        public void fillShapeOff()
+        {
+            // Act
+            StateManager.Instance.F = false;
+
+            // Assert
+            Assert.IsFalse(StateManager.Instance.F);
+        }
+
         [Test]
         public void CreateVariable()
         {
@@ -159,20 +183,25 @@ namespace TestProject1
         //    // Assert
         //}
 
-        /*[Test]
+        /// <summary>
+        /// test for run commamd
+        /// </summary>
+        [Test]
         public void ParseCommand()
         {
-            CommandParser commandParser = new CommandParser();
-            Bitmap drawBitmap = new Bitmap(400, 400);
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = drawBitmap;
-            RichTextBox textBox = new RichTextBox();
-            textBox.Text = "drawto 10, 10";
-            List<string> commandList = new List<string>();
-            // commandList.Add("drawto 10, 10");
-            commandList.Add("circle 50");
-            commandParser.ParseCommand(commandList, pictureBox, textBox);
+            // Arrange
+            var commandList = new List<string> { "circle 50" };
+
+            var pictureBoxMock = new Mock<PictureBox>();
+            var textboxMock = new Mock<RichTextBox>();
+
+            var commandParser = new CommandParser();
+
+            // Act
+            commandParser.ParseCommand(commandList, pictureBoxMock.Object, textboxMock.Object);
+
+            // Assert
             Assert.IsNotNull(commandParser);
-        }*/
+        }
     }
 }

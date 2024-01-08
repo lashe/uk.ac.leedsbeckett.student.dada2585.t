@@ -30,6 +30,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             CommandParser parser = new CommandParser();
             SpecialCommandParser specialCommandParser = new SpecialCommandParser();
             CommandChecker checkCommand = new CommandChecker();
+            Bitmap drawBitmap;
+            drawBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = pictureBox1.CreateGraphics();
             // Graphics g = Graphics.FromImage(drawBitmap);
             string[] commands = commandInputField.Lines;
@@ -63,8 +65,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                         if (errorList.Count > 0)
                         {
                             // throw error
+                            
                             ErrorHandler.HandleError(errorList, g);
-                            pictureBox1.Invalidate();
+                            
+                            pictureBox1.Image = drawBitmap;
 
                         }
                         specialCommandParser.ParseCommand(specialCommandList, pictureBox1, commandInputField);
@@ -80,7 +84,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                             }
                             else
                             {
-                                string error = $"error on line {i + 1} at {commands[i]}";
+                                string error = $"syntax error on line {i + 1} at {commands[i]}";
                                 errorList.Add(error);
                             }
 
@@ -88,8 +92,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                         if (errorList.Count > 0)
                         {
                             // throw error
-                            ErrorHandler.HandleError(errorList, g);
-                            pictureBox1.Invalidate();
+                            throw new CustomException(errorList);
+                            
 
                         }
                         parser.ParseCommand(commandList, pictureBox1, commandInputField);

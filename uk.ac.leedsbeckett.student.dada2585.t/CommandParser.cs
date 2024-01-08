@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Runtime.Intrinsics;
 
 namespace uk.ac.leedsbeckett.student.dada2585.t
 {
@@ -74,6 +75,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     int y2 = int.Parse(parameters[2]);
                     Lines line = new Lines(color, x, y, fill, x2, y2);
                     canvas.AddShape(line);
+                    Pointer pointer = new Pointer(color, x, y, fill);
+                    canvas.AddShape(pointer);
                     StateManager.Instance.X = x2;
                     StateManager.Instance.Y = y2;
                 }
@@ -205,7 +208,67 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 else if (Regex.IsMatch(commands[i], expression2, RegexOptions.IgnoreCase) == true)
                 {
                     string variableName = parameters[0];
-                    string variableValue = parameters[1];
+                    var v2 = VariablesHandler.GetVariable(parameters[2]);
+                    var v3 = VariablesHandler.GetVariable(parameters[4]);
+                    int a = int.Parse($"{v2}");
+                    int b = int.Parse($"{v3}");
+                    int c = a + b;
+                    string variableValue = c.ToString();
+                    VariablesHandler.SetVariable(variableName, variableValue);
+                }
+                else if (Regex.IsMatch(commands[i], expression3, RegexOptions.IgnoreCase) == true)
+                {
+                    string[] parts = commands[i].Split('=');
+                    string variableName = parts[0].Trim();
+                    string expression = parts[1].Trim();
+                    string[] splitexpression = expression.Split('+');
+                    string variableName2 = splitexpression[0];
+                    string variableName3 = splitexpression[1];
+                    if(int.TryParse(variableName3, out int result) && result > 0)
+                    {
+                        var v2 = VariablesHandler.GetVariable(variableName2);
+                        int a = int.Parse($"{v2}");
+                        int b = int.Parse($"{splitexpression[1]}");
+                        int c = a + b;
+                        string variableValue = c.ToString();
+                        VariablesHandler.SetVariable(variableName, variableValue);
+                    }
+                    else
+                    {
+                        var v2 = VariablesHandler.GetVariable(variableName2);
+                        var v3 = VariablesHandler.GetVariable(variableName3);
+                        int a = int.Parse($"{v2}");
+                        int b = int.Parse($"{v3}");
+                        int c = a + b;
+                        string variableValue = c.ToString();
+                        VariablesHandler.SetVariable(variableName, variableValue);
+                    }
+                }
+                else if (Regex.IsMatch(commands[i], expression4, RegexOptions.IgnoreCase) == true)
+                {
+                    string[] parts = commands[i].Split('=');
+                    string variableName = parts[0].Trim();
+                    string expression = parts[1].Trim();
+                    string[] splitexpression = expression.Split('+');
+                    string variableName2 = splitexpression[0];
+                    var v1 = VariablesHandler.GetVariable(variableName);
+                    var v2 = VariablesHandler.GetVariable(variableName2);
+                    int a = int.Parse($"{v2}");
+                    int b = int.Parse($"{splitexpression[1]}");
+                    int c = a + b;
+                    string variableValue = c.ToString();
+                    VariablesHandler.SetVariable(variableName, variableValue);
+                }
+                else if (Regex.IsMatch(commands[i], expression5, RegexOptions.IgnoreCase) == true)
+                {
+                    string variableName = parameters[0];
+                    string variableName2 = parameters[2];
+                    int a = int.Parse(parameters[4]);
+                    var v1 = VariablesHandler.GetVariable(variableName);
+                    var v2 = VariablesHandler.GetVariable(variableName2);
+                    int b = int.Parse($"{v2}");
+                    int c = a + b;
+                    string variableValue = c.ToString();
                     VariablesHandler.SetVariable(variableName, variableValue);
                 }
                 else if (Regex.IsMatch(commands[i], ifExpression, RegexOptions.IgnoreCase) == true)
@@ -272,20 +335,21 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                                 {
                                     if (splitMethodParams[cp].Equals(cmdParams[mp]) && cmdParams.Length == 2)
                                     {
-                                        newCmd.Add($"{cmdParams[0]} {splitParams[cp]}");
+                                        newCmd.Add(cmdParams[0] + splitParams[cp]);
                                     }
                                     else if(splitMethodParams[cp].Equals(cmdParams[mp]) && cmdParams.Length > 2)
                                     {
                                         if(cmdParams[cp].Equals(cmdParams[1]))
                                         {
-                                            newCmd.Add($"{cmdParams[0]} {splitParams[cp]}");
+                                            newCmd.Add(cmdParams[0] + splitParams[cp]);
                                         }
                                         else
                                         {
-                                            newCmd.Add($"{splitParams[cp]}");
+                                            newCmd.Add(splitParams[cp]);
                                         }
                                     }
                                 }
+                                MessageBox.Show(newCmd.ToString());
                             }
                             if(cmdParams.Length == 2)
                             {
@@ -299,7 +363,8 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                             }
                         }
                         string viewList = string.Join(", ", commandList);
-                        MessageBox.Show(viewList);
+                        // MessageBox.Show(viewList);
+                        // AppendTextToTextBox(viewList);
                         // this.ParseCommand(commandList, pictureBox, commandInputField);
                     }
                     else

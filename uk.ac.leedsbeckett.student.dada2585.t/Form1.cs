@@ -206,5 +206,11 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             Thread drawShapesThread = new Thread(InitiateThread);
             drawShapesThread.Start();
         }
+
+        public void AppendTextToTextBox(string text)
+        {
+            // Append text to the TextBox
+            richTextBox1.AppendText(text + Environment.NewLine);
+        }
     }
 }

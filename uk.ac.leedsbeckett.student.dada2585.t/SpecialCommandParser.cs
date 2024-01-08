@@ -39,6 +39,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string method = @"method (?<methodName>\w+)(?<parameters>\(.+?\))";
         string endMethod = @"^endMethod$";
         string methodCall = @"(?<methodName>\w+)(?<parameters>\(.+?\))";
+        string whileExpression = @"^while \S+ < \d+$";
 
         /// <summary>
         /// the method for handling a parsed commands
@@ -94,6 +95,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     }
                     string methodCommands = string.Join(", ", command);
                 MethodsHandler.SetMethodCommands(MethodName, methodCommands);
+                }
+                else if (Regex.IsMatch(commands[0], whileExpression, RegexOptions.IgnoreCase) == true)
+                {
+                    
                 }
                 else
                 {
