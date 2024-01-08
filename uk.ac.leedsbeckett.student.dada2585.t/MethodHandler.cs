@@ -43,28 +43,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         /// <param name="name">this the variable name</param>
         /// <returns></returns>
         /// <exception cref="Exception">thrown when a variable does not exist</exception>
-        public static object GetVariable(string name)
+        public static object GetMethod(string name)
         {
             if(methods.ContainsKey(name)) return methods[name];
             throw new Exception($"Method {name} not found");
-        }
-
-        /// <summary>
-        /// method for updating a variable value
-        /// </summary>
-        /// <param name="name">variable name</param>
-        /// <param name="newValue"> new value</param>
-        /// <exception cref="ArgumentException"></exception>
-        public static void UpdateVariable(string name, object newValue)
-        {
-            if(methods.ContainsKey(name))
-            {
-                methods[name] = newValue;
-            }
-            else
-            {
-                throw new ArgumentException($"Variable {name} not found");
-            }
         }
 
         public static void SetMethodParameters(string methodName, object value)

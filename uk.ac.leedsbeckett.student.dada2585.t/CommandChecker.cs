@@ -33,6 +33,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string thread = @"^thread$";
         string method = @"method (?<methodName>\w+)(?<parameters>\(.+?\))";
         string endMethod = @"^endMethod$";
+        string methodCall = @"(?<methodName>\w+)(?<parameters>\(.+?\))";
 
 
         /// <summary>
@@ -151,6 +152,10 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 return true;
             }
             else if (Regex.IsMatch(command, endMethod, RegexOptions.IgnoreCase) == true)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(command, methodCall, RegexOptions.IgnoreCase) == true)
             {
                 return true;
             }

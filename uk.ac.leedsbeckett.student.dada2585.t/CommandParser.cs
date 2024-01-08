@@ -38,6 +38,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
         string endIf = @"^endif$";
         string method = @"method (?<methodName>\w+)(?<parameters>\(.+?\))";
         string endMethod = @"^endMethod$";
+        string methodCall = @"(?<methodName>\w+)(?<parameters>\(.+?\))";
 
         /// <summary>
         /// the method for handling a parsed commands
@@ -243,6 +244,68 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     }
                     string methodCommands = string.Join(", ", command);
                     Console.WriteLine(methodCommands);
+                }
+                else if (Regex.IsMatch(commands[i], methodCall, RegexOptions.IgnoreCase) == true)
+                {
+                    Match match = Regex.Match(commands[i], methodCall, RegexOptions.IgnoreCase);
+                    string MethodName = match.Groups["methodName"].Value;
+                    string variableValue = match.Groups["parameters"].Value;
+                    string passsedParams = variableValue.Trim('(', ')');
+                    string[] splitParams = passsedParams.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+                    var getParams = MethodsHandler.GetMethod(MethodName);
+                    string methodParams = getParams.ToString();
+                    string storedParams = methodParams.Trim('(', ')');
+                    string[] splitMethodParams = storedParams.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+                    if(splitMethodParams.Length == splitParams.Length)
+                    {
+                        List<string> commandList = new List<string>();
+                        List<string> newCmd = new List<string>();
+                        var value = MethodsHandler.GetMethodCommands(MethodName);
+                        string methodCommands = value.ToString();
+                        string[] indvCmd = methodCommands.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+                        for (int ic = 0; ic < indvCmd.Length; ic++)
+                        {
+                            string[] cmdParams = indvCmd[ic].Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                            for (int cp = 1; cp < cmdParams.Length; cp++)
+                            {
+                                for (int mp = 0; mp < splitMethodParams.Length; mp++)
+                                {
+                                    if (splitMethodParams[cp].Equals(cmdParams[mp]) && cmdParams.Length == 2)
+                                    {
+                                        newCmd.Add($"{cmdParams[0]} {splitParams[cp]}");
+                                    }
+                                    else if(splitMethodParams[cp].Equals(cmdParams[mp]) && cmdParams.Length > 2)
+                                    {
+                                        if(cmdParams[cp].Equals(cmdParams[1]))
+                                        {
+                                            newCmd.Add($"{cmdParams[0]} {splitParams[cp]}");
+                                        }
+                                        else
+                                        {
+                                            newCmd.Add($"{splitParams[cp]}");
+                                        }
+                                    }
+                                }
+                            }
+                            if(cmdParams.Length == 2)
+                            {
+                                string newCommand = $"{newCmd[0]}";
+                                commandList.Add(newCommand);
+                            }
+                            else
+                            {
+                                string newCommand = string.Join(", ", newCmd);
+                                commandList.Add(newCommand);
+                            }
+                        }
+                        string viewList = string.Join(", ", commandList);
+                        MessageBox.Show(viewList);
+                        // this.ParseCommand(commandList, pictureBox, commandInputField);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Invalid command {commands[i]}");
+                    }
                 }
                 else
                 {
