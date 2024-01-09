@@ -60,12 +60,14 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 if (parameters[0] == penPositon )
                 {
                     // move cursor to new coordinates
-                    Cursor cursor = new Cursor(x, y);
+                    //Cursor cursor = new Cursor(x, y);
                     //cursor.MoveCursor(cursor.X, cursor.Y);
-                    Pointer pointer = new Pointer(color, cursor.X, cursor.Y, fill);
+                    int x2 = int.Parse(parameters[1]);
+                    int y2 = int.Parse(parameters[2]);
+                    Pointer pointer = new Pointer(color, x2, y2, fill);
                     canvas.AddShape(pointer);
-                    StateManager.Instance.X = x;
-                    StateManager.Instance.Y = y;
+                    StateManager.Instance.X = x2;
+                    StateManager.Instance.Y = y2;
                     //pictureBox.Invalidate();
                 }
                 else if (parameters[0] == drawingPosition)
@@ -292,21 +294,23 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 }
                 else if (Regex.IsMatch(commands[i], method, RegexOptions.IgnoreCase) == true)
                 {
-                    String[] command = new string[0];
+                    List<string> command = new List<string>();
                     Match match = Regex.Match(commands[i], method, RegexOptions.IgnoreCase);
                     string MethodName = match.Groups["methodName"].Value;
                     string variableValue = match.Groups["parameters"].Value;
                     MethodsHandler.SetMethod(MethodName, variableValue);
-                    for (int j = i + 1; j < commands.Count; j++)
+                    MessageBox.Show(commands[i]);
+                    for (int j = i + 1; j < commands.Count - 1; j++)
                     {
-                        if (Regex.IsMatch(commands[j], endMethod, RegexOptions.IgnoreCase) == true)
-                        {
-                            break;
-                        }
-                        command.Append(commands[j].ToLower());
+                        //if (Regex.IsMatch(commands[j], endMethod, RegexOptions.IgnoreCase) == true)
+                        //{
+                        //    continue;
+                        //}
+                        command.Add(commands[j].ToLower());
                     }
                     string methodCommands = string.Join(", ", command);
-                    Console.WriteLine(methodCommands);
+                    MethodsHandler.SetMethodCommands(MethodName, methodCommands);
+                    MessageBox.Show(methodCommands);
                 }
                 else if (Regex.IsMatch(commands[i], methodCall, RegexOptions.IgnoreCase) == true)
                 {
@@ -314,17 +318,18 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     string MethodName = match.Groups["methodName"].Value;
                     string variableValue = match.Groups["parameters"].Value;
                     string passsedParams = variableValue.Trim('(', ')');
-                    string[] splitParams = passsedParams.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] splitParams = passsedParams.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                     var getParams = MethodsHandler.GetMethod(MethodName);
                     string methodParams = getParams.ToString();
                     string storedParams = methodParams.Trim('(', ')');
-                    string[] splitMethodParams = storedParams.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] splitMethodParams = storedParams.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                     if(splitMethodParams.Length == splitParams.Length)
                     {
                         List<string> commandList = new List<string>();
                         List<string> newCmd = new List<string>();
                         var value = MethodsHandler.GetMethodCommands(MethodName);
                         string methodCommands = value.ToString();
+                        MessageBox.Show(methodCommands);
                         string[] indvCmd = methodCommands.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
                         for (int ic = 0; ic < indvCmd.Length; ic++)
                         {
@@ -349,7 +354,6 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                                         }
                                     }
                                 }
-                                MessageBox.Show(newCmd.ToString());
                             }
                             if(cmdParams.Length == 2)
                             {
@@ -363,7 +367,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                             }
                         }
                         string viewList = string.Join(", ", commandList);
-                        // MessageBox.Show(viewList);
+                        //MessageBox.Show(viewList);
                         // AppendTextToTextBox(viewList);
                         // this.ParseCommand(commandList, pictureBox, commandInputField);
                     }

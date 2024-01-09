@@ -48,6 +48,16 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                 shape.Draw(e.Graphics);
             }
         }
+
+        //public void StartDrawingThread()
+        //{
+        //    Thread threadA = new Thread(() => DrawShapes(shapeListA));
+        //    Thread threadB = new Thread(() => DrawShapes(shapeListB));
+
+        //    threadA.Start();
+        //    threadB.Start();
+        //}
+
         /// <summary>
         /// method for adding a shape to a list shapes to be drawn in the picture box
         /// </summary>

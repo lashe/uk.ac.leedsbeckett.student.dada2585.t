@@ -94,7 +94,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     command.Add(commands[j].ToLower());
                     }
                     string methodCommands = string.Join(", ", command);
-                MethodsHandler.SetMethodCommands(MethodName, methodCommands);
+                    MethodsHandler.SetMethodCommands(MethodName, methodCommands);
                 }
                 else if (Regex.IsMatch(commands[0], whileExpression, RegexOptions.IgnoreCase) == true)
                 {

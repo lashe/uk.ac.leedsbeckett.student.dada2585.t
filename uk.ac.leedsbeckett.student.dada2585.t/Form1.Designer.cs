@@ -38,8 +38,8 @@
             button2 = new Button();
             button1 = new Button();
             textBox1 = new TextBox();
+            programWindow = new RichTextBox();
             pictureBox1 = new PictureBox();
-            richTextBox1 = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -65,7 +65,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(richTextBox1);
+            splitContainer1.Panel2.Controls.Add(programWindow);
             splitContainer1.Panel2.Controls.Add(pictureBox1);
             splitContainer1.Size = new Size(882, 573);
             splitContainer1.SplitterDistance = 411;
@@ -142,11 +142,11 @@
             // 
             // button5
             // 
-            button5.Location = new Point(44, 94);
+            button5.Location = new Point(304, 8);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
             button5.TabIndex = 3;
-            button5.Text = "button5";
+            button5.Text = "Thread";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
@@ -181,6 +181,14 @@
             textBox1.TabIndex = 0;
             textBox1.KeyDown += CommandLine_KeyDown;
             // 
+            // programWindow
+            // 
+            programWindow.Location = new Point(3, 332);
+            programWindow.Name = "programWindow";
+            programWindow.Size = new Size(461, 194);
+            programWindow.TabIndex = 1;
+            programWindow.Text = "";
+            // 
             // pictureBox1
             // 
             pictureBox1.BackColor = SystemColors.ActiveBorder;
@@ -190,14 +198,6 @@
             pictureBox1.Size = new Size(467, 327);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(3, 332);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(461, 194);
-            richTextBox1.TabIndex = 1;
-            richTextBox1.Text = "";
             // 
             // Form1
             // 
@@ -235,6 +235,6 @@
         private Button button4;
         private Button button3;
         private Button button5;
-        private RichTextBox richTextBox1;
+        private RichTextBox programWindow;
     }
 }

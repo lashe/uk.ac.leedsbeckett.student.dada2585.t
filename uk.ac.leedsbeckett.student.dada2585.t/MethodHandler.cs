@@ -56,7 +56,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
         public static object GetMethodParameters(string methodName)
         {
-            if (methodParameters.ContainsKey(methodName)) return methods[methodName];
+            if (methodParameters.ContainsKey(methodName)) return methodParameters[methodName];
             throw new Exception($"Method {methodName} not found");
         }
 
@@ -67,7 +67,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
 
         public static object GetMethodCommands(string methodName)
         {
-            if (methods.ContainsKey(methodName)) return methods[methodName];
+            if (methodCommands.ContainsKey(methodName)) return methodCommands[methodName];
             throw new Exception($"Method {methodName} not found");
         }
     }

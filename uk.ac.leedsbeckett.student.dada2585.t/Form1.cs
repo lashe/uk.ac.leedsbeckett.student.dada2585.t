@@ -149,7 +149,16 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                     {
                         if (textBox1.Text.ToLower() == "run")
                         {
-                            RunCommand.Run_Command(pictureBox1, commandInputField);
+                            if(commandInputField.Text != "" && programWindow.Text == "")
+                            {
+                                RunCommand.Run_Command(pictureBox1, commandInputField);
+                            }
+                            else if (commandInputField.Text != "" && programWindow.Text != "")
+                            {
+                                List<string> commandListA = new List<string>();
+                                List<string> commandListB = new List<string>();
+
+                            }
                         }
                         commandList.Add(textBox1.Text.ToLower());
                     }
@@ -207,10 +216,6 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
             drawShapesThread.Start();
         }
 
-        public void AppendTextToTextBox(string text)
-        {
-            // Append text to the TextBox
-            richTextBox1.AppendText(text + Environment.NewLine);
-        }
+        
     }
 }

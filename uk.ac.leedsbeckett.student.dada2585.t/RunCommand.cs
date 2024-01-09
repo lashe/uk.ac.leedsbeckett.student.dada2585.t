@@ -78,6 +78,7 @@ namespace uk.ac.leedsbeckett.student.dada2585.t
                         // check the syntax for each command in the list of commands
                         for (int i = 0; i < commands.Length; i++)
                         {
+                            // MessageBox.Show($"error: {commands[i].ToLower()}");
                             if (checkCommand.CheckCommand(commands[i].ToLower()) == true)
                             {
                                 commandList.Add(commands[i].ToLower());
